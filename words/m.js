@@ -1,4 +1,4 @@
-[
+export const m = [
   "m",
   "m.m.",
   "m-1",
