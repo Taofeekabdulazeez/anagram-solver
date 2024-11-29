@@ -1,4 +1,3 @@
-
 function checkAnagram(str, subStr) {
   if (str.length < subStr.length) return false;
   const strFreq = getLettersFreqCount(str);
@@ -28,22 +27,17 @@ function getLettersFreqCount(str) {
   return countObj;
 }
 
-
 function findAllAnagrams(str) {
-  const letters = ['ate', 'eat', 'pet', 'stream', 'rats', 'eaters']
+  const letters = ["ate", "eat", "pet", "stream", "rats", "eaters"];
   const anagrams = [];
 
   for (let i = 0; i < letters.length; i++) {
-    if (checkAnagram(str, letters[i]))
-      anagrams.push(letters[i]);
+    if (checkAnagram(str, letters[i])) anagrams.push(letters[i]);
   }
 
   return anagrams;
-
-
 }
 
+console.log(findAllAnagrams("ates"));
 
-
-// console.log(getLettersFreqCount('Taofeek'))
-console.log(findAllAnagrams('ates'))
+module.exports = { findAllAnagrams };
