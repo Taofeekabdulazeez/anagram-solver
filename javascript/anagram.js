@@ -1,3 +1,5 @@
+const utils = require("./utils");
+
 function checkAnagram(str, subStr) {
   if (str.length < subStr.length) return false;
   const strFreq = getLettersFreqCount(str);
@@ -27,8 +29,19 @@ function getLettersFreqCount(str) {
   return countObj;
 }
 
-function findAllAnagrams(str) {
-  const letters = ["ate", "eat", "pet", "stream", "rats", "eaters"];
+function getUniqueLetters(str) {
+  const strArr = str.toLowerCase().split("").sort();
+  return [...new Set(strArr)];
+}
+
+async function findAllAnagrams(str) {
+  const uniqueLetters = getUniqueLetters(str);
+
+  const letterArrs = await Promise.all(
+    uniqueLetters.map(async (letter) => utils.readAnagramFile(letter))
+  );
+  console.log(letterArrs);
+  const letters = letterArrs.flat();
   const anagrams = [];
 
   for (let i = 0; i < letters.length; i++) {
@@ -37,7 +50,5 @@ function findAllAnagrams(str) {
 
   return anagrams;
 }
-
-console.log(findAllAnagrams("ates"));
 
 module.exports = { findAllAnagrams };

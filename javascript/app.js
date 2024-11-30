@@ -12,11 +12,13 @@ const loggerMiddleWare = (req, res, next) => {
 
 app.use(loggerMiddleWare);
 
-app.get("/:word", async (req, res) => {
+app.get("/anagram/:word", async (req, res) => {
   const { word } = req.params;
-  const data = await utils.readAnagramFile(word);
-  // const words = anagaram.findAllAnagrams(word)
-  res.send({ results: data?.length, words: data });
+  // const data = await utils.readAnagramFile(word);
+  const words = await anagaram.findAllAnagrams(word);
+  res.send({ results: words.length, words });
 });
+
+app.get("/favicon.ico", (req, res) => res.status(204));
 
 app.listen(PORT, () => console.log(`Listening to port: ${PORT}`));
