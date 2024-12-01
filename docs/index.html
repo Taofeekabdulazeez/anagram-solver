@@ -103,6 +103,8 @@
 
       const markUp = words.map((word) => `<li>${word}</li>`).join("");
 
+      wordList.innerHTML = "";
+
       wordList.insertAdjacentHTML("afterbegin", markUp);
 
       input.value = "";
