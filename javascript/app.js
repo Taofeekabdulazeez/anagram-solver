@@ -1,6 +1,7 @@
 const express = require("express");
 const utils = require("./utils");
 const anagaram = require("./anagram");
+const cors = require("cors");
 
 const PORT = 8000;
 
@@ -11,6 +12,7 @@ const loggerMiddleWare = (req, res, next) => {
 };
 
 app.use(loggerMiddleWare);
+app.use(cors());
 
 app.get("/anagram/:word", async (req, res) => {
   const { word } = req.params;
