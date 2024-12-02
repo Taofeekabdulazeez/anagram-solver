@@ -1,5 +1,6 @@
 import json
 import logging
+import time
 
 # Configure logging
 logging.basicConfig(
@@ -30,7 +31,7 @@ def load_anagram_map(filepath):
         logging.error(f"Error decoding JSON file: {filepath}")
         return {}
 
-def find_anagrams(word, anagram_map, sub_word_map):
+def find_anagrams(word, anagram_map, sub_word_map, canonical_map):
     """
     Find anagrams of a given word and its subwords using the preprocessed anagram and subword maps.
 
@@ -43,7 +44,7 @@ def find_anagrams(word, anagram_map, sub_word_map):
         list: A list of anagrams for the given word and its subwords.
     """
     word = word.strip().lower()  # Standardize the input
-    canonical_form = ''.join(sorted(word))  # Compute the canonical form
+    canonical_form = canonical_map.get(word, ''.join(sorted(word)))  # Compute the canonical form
     
     # Initialize result list to store anagrams
     result_anagrams = set()  # Use a set to avoid duplicates
@@ -62,7 +63,7 @@ def find_anagrams(word, anagram_map, sub_word_map):
     
     # Get anagrams for each subword
     for subword in subwords:
-        subword_canonical = ''.join(sorted(subword))  # Compute canonical form for the subword
+        subword_canonical = canonical_map.get(subword, ''.join(sorted(subword)))   # Compute canonical form for the subword
         subword_anagrams = anagram_map.get(subword_canonical, [])
         if subword_anagrams:
             logging.debug(f"Anagrams for subword '{subword}': {subword_anagrams}")
@@ -74,10 +75,12 @@ if __name__ == "__main__":
     # Path to the anagram map JSON file
     ANAGRAM_MAP_PATH = "anagram_map.json"
     SUBWORD_MAP_PATH = "subword_map.json"
+    CANONICAL_MAP_PATH = "canonical_map.json"
 
     # Load the preprocessed anagram map
     anagram_map = load_anagram_map(ANAGRAM_MAP_PATH)
     sub_word_map = load_anagram_map(SUBWORD_MAP_PATH)
+    canonical_map = load_anagram_map(CANONICAL_MAP_PATH)
 
     # Prompt user for input
     while True:
@@ -91,8 +94,12 @@ if __name__ == "__main__":
             continue
 
         # Find anagrams
-        anagrams = find_anagrams(word, anagram_map, sub_word_map)
+        start_time = time.time()  # Start the timer
+        anagrams = find_anagrams(word, anagram_map, sub_word_map, canonical_map)  # Call the function
+        end_time = time.time()
         if anagrams:
+            logging.info(f"Number of anagrams: {len(anagrams)}")
+            logging.info(f"Time taken: {end_time - start_time:.6f} seconds")
             print(f"Anagrams of '{word}': {', '.join(anagrams)}")
         else:
             print(f"No anagrams found for '{word}'.")
