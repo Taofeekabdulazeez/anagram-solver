@@ -1,1 +1,4 @@
 *node_modules
+anagram_map.json
+canonical_map.json
+subword_map.json
