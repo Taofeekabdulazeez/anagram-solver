@@ -93,10 +93,10 @@
 
     async function fetchAnagram() {
       if (!input.value) return alert("Please enter a word!");
-      const resposne = await fetch(
+      const response = await fetch(
         `http://localhost:8000/anagram/${input.value}`
       );
-      const data = await resposne.json();
+      const data = await response.json();
       const { results, words } = data;
 
       infoText.innerHTML = `<strong>${results}</strong> found for word "${input.value}"`;
