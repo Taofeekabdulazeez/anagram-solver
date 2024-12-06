@@ -91,6 +91,8 @@
     const infoText = document.querySelector(".info-text");
     const wordList = document.querySelector(".word-list");
 
+    function logEnv() {}
+
     async function fetchAnagram() {
       if (!input.value) return alert("Please enter a word!");
       const response = await fetch(
