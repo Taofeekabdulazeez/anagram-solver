@@ -1,3 +1,4 @@
+package com.anagram_solver;
 import java.util.HashMap;
 
 public class Utils {
