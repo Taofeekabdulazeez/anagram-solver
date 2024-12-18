@@ -1,7 +1,7 @@
-package com.anagram_solver;
+package com.anagram_solver.utils;
 import java.util.HashMap;
 
-public class Utils {
+public class Util {
     public static HashMap<Character, Integer> getLettersFrequencyCount(String str) {
         HashMap<Character, Integer> freqMap = new HashMap<Character, Integer>();
 
