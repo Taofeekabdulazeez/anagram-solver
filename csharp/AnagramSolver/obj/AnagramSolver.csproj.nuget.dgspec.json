@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL\\Desktop\\github\\anagram-solver\\c#\\AnagramSolver\\AnagramSolver.csproj": {}
+    "C:\\Users\\DELL\\Desktop\\github\\anagram-solver\\csharp\\AnagramSolver\\AnagramSolver.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL\\Desktop\\github\\anagram-solver\\c#\\AnagramSolver\\AnagramSolver.csproj": {
+    "C:\\Users\\DELL\\Desktop\\github\\anagram-solver\\csharp\\AnagramSolver\\AnagramSolver.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\Desktop\\github\\anagram-solver\\c#\\AnagramSolver\\AnagramSolver.csproj",
+        "projectUniqueName": "C:\\Users\\DELL\\Desktop\\github\\anagram-solver\\csharp\\AnagramSolver\\AnagramSolver.csproj",
         "projectName": "AnagramSolver",
-        "projectPath": "C:\\Users\\DELL\\Desktop\\github\\anagram-solver\\c#\\AnagramSolver\\AnagramSolver.csproj",
+        "projectPath": "C:\\Users\\DELL\\Desktop\\github\\anagram-solver\\csharp\\AnagramSolver\\AnagramSolver.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\Desktop\\github\\anagram-solver\\c#\\AnagramSolver\\obj\\",
+        "outputPath": "C:\\Users\\DELL\\Desktop\\github\\anagram-solver\\csharp\\AnagramSolver\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config"
