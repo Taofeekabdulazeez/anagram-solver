@@ -99,7 +99,9 @@
         `https://anagram-solver.onrender.com/anagrams/${input.value}`
       );
       const data = await response.json();
-      const { results, words } = data;
+      const { results, data: words } = data;
+
+      alert(results);
 
       infoText.innerHTML = `<strong>${results}</strong> found for word "${input.value}"`;
 
