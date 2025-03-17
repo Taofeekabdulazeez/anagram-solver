@@ -1,7 +1,6 @@
 using AnagramSolver;
 
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
 
 builder.Services.AddCors(options =>
 {
@@ -13,8 +12,9 @@ builder.Services.AddCors(options =>
     });
 });
 
-app.UseCors("AllowAll");
+var app = builder.Build();
 
+app.UseCors("AllowAll");
 
 app.MapGet("/", () => "Welcome to Anagram Solver API");
 
