@@ -77,6 +77,35 @@
         rgba(50, 50, 93, 0.2) 0 6px 15px 0, rgba(0, 0, 0, 0.1) 0 2px 2px 0,
         rgba(50, 151, 211, 0.3) 0 0 0 4px;
     }
+
+    .loader-container {
+      width: fit-content;
+      margin: 100px auto;
+    }
+
+    .loader {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: inline-block;
+      border-top: 3px solid #405cf5;
+      border-right: 3px solid transparent;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
   <body>
     <h1>Anagram solver</h1>
@@ -84,28 +113,35 @@
     <button class="button" role="button">Search</button>
     <p class="info-text"></p>
     <ul class="word-list"></ul>
+    <div class="loader-container hidden">
+      <span class="loader"></span>
+    </div>
   </body>
   <script>
     const input = document.querySelector("input");
     const button = document.querySelector("button");
     const infoText = document.querySelector(".info-text");
     const wordList = document.querySelector(".word-list");
-
-    function logEnv() {}
+    const spinner = document.querySelector(".loader-container");
 
     async function fetchAnagram() {
       if (!input.value) return alert("Please enter a word!");
+
+      wordList.innerHTML = "";
+      infoText.innerHTML = "";
+      spinner.classList.remove("hidden");
+
       const response = await fetch(
         `https://anagram-solver.onrender.com/anagrams/${input.value}`
       );
       const data = await response.json();
       const { results, data: words } = data;
 
+      spinner.classList.add("hidden");
+
       infoText.innerHTML = `<strong>${results}</strong> found for word "${input.value}"`;
 
       const markUp = words.map((word) => `<li>${word}</li>`).join("");
-
-      wordList.innerHTML = "";
 
       wordList.insertAdjacentHTML("afterbegin", markUp);
 
