@@ -96,7 +96,7 @@
     async function fetchAnagram() {
       if (!input.value) return alert("Please enter a word!");
       const response = await fetch(
-        `http://localhost:8000/anagram/${input.value}`
+        `https://anagram-solver.onrender.com/anagrams/${input.value}`
       );
       const data = await response.json();
       const { results, words } = data;

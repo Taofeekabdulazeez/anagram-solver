@@ -40,13 +40,18 @@ public class Anagram
         return sortedLetters;
     }
 
+    private static string GetUniqueLetters(string word)
+    {
+        return word;
+    }
+
     public static List<string> FindAllAnagrams(string word)
     {
         List<string> anagrams = [];
 
         foreach (char letter in SortWordLetters(word))
         {
-            List<string>? words = FileReader.ReadJsonWordsArray(letter);
+            List<string>? words = AnagramFileReader.ReadJsonWordsArray(letter);
 
             if (words is null) continue;
 
@@ -61,3 +66,4 @@ public class Anagram
         return anagrams;
     }
 }
+

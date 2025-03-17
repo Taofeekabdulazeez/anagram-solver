@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace AnagramSolver;
 
-public class FileReader
+public class AnagramFileReader
 {
 
     public static List<string>? ReadJsonWordsArray(char letter)
