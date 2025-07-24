@@ -86,9 +86,8 @@ public class Anagram
 
         foreach (var word in words)
         {
-            if (requiredLetters.All(letter => word.Contains(letter)))
+            if (requiredLetters.Any(letter => word.Contains(letter)))
             {
-                Console.WriteLine("First Edge case executed");
                 matches.Add(word);
             }
             else

@@ -23,8 +23,7 @@ app.MapGet("/", () => "Welcome to Anagram Solver API");
 app.MapGet("/anagrams/{word}", (string word, [FromQuery] string extras) =>
 {
 
-    // Console.WriteLine(length);
-    var phrase = "hinders olivea";
+    var phrase = word;
     var extraLetters = extras
         .Split(',', StringSplitOptions.RemoveEmptyEntries)
         .Where(s => s.Length == 1)
@@ -35,13 +34,6 @@ app.MapGet("/anagrams/{word}", (string word, [FromQuery] string extras) =>
 
     var (possibleWordsWithExtraLetters, possibleWords) = Anagram.FilterWordsByLetters(anagrams, extraLetters);
 
-    // if (serialize is null)
-    //     return new
-    //     {
-    //         Word = word,
-    //         Results = anagrams.Count,
-    //         Data = anagrams
-    //     };
     return new
     {
         Phrase = phrase,
