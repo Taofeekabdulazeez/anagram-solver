@@ -16,7 +16,7 @@ public class AnagramFileReader
 
     }
 
-    private static void LogList(List<string>? list)
+    public static void LogList(List<string>? list)
     {
         if (list is null) return;
 
