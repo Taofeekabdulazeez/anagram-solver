@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 using AnagramSolver;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,17 +20,37 @@ app.UseCors("AllowAll");
 
 app.MapGet("/", () => "Welcome to Anagram Solver API");
 
-app.MapGet("/anagrams/{word}", (string word, string? length) =>
+app.MapGet("/anagrams/{word}", (string word, [FromQuery] string extras) =>
 {
-    Console.WriteLine(length);
-    List<string> anagrams = Anagram.FindAllAnagrams(word);
 
+    // Console.WriteLine(length);
+    var phrase = "hinders olivea";
+    var extraLetters = extras
+        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+        .Where(s => s.Length == 1)
+        .Select(s => s[0])
+        .ToList();
 
+    List<string> anagrams = Anagram.FindAllAnagrams(word + string.Concat(extraLetters));
+
+    var (possibleWordsWithExtraLetters, possibleWords) = Anagram.FilterWordsByLetters(anagrams, extraLetters);
+
+    // if (serialize is null)
+    //     return new
+    //     {
+    //         Word = word,
+    //         Results = anagrams.Count,
+    //         Data = anagrams
+    //     };
     return new
     {
-        Word = word,
-        Results = anagrams.Count,
-        Data = anagrams
+        Phrase = phrase,
+        ExtraLetters = extraLetters,
+        NumberOfPossibleWords = possibleWords.Count,
+        NumberOfPossibleWordsWithExtraLetters = possibleWordsWithExtraLetters.Count,
+        TotalNumberOfPossibleWords = anagrams.Count,
+        PossibleWords = Anagram.Serialize(possibleWords),
+        PossibleWordsWithExtraLetters = Anagram.Serialize(possibleWordsWithExtraLetters),
     };
 });
 
