@@ -1,4 +1,5 @@
 namespace AnagramSolver;
+
 public class Anagram
 {
     private static Dictionary<char, int> GetLettersFrequency(string word)
@@ -64,6 +65,39 @@ public class Anagram
         }
 
         return anagrams;
+    }
+
+    public static Dictionary<string, bool> Serialize(List<string> wordList)
+    {
+        var words = new Dictionary<string, bool>();
+
+        foreach (var item in wordList)
+        {
+            words[item] = true;
+        }
+        return words;
+    }
+
+    public static (List<string> Matches, List<string> NonMatches) FilterWordsByLetters(
+      List<string> words, List<char> requiredLetters)
+    {
+        var matches = new List<string>();
+        var nonMatches = new List<string>();
+
+        foreach (var word in words)
+        {
+            if (requiredLetters.All(letter => word.Contains(letter)))
+            {
+                Console.WriteLine("First Edge case executed");
+                matches.Add(word);
+            }
+            else
+            {
+                nonMatches.Add(word);
+            }
+        }
+
+        return (matches, nonMatches);
     }
 }
 

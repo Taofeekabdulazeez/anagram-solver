@@ -1,2 +1,2 @@
 ### Root
-GET http://localhost:5193/anagrams/art?query=m
+GET http://localhost:5193/anagrams/mmaster/?extra=a
