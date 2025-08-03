@@ -20,6 +20,18 @@ app.UseCors("AllowAll");
 
 app.MapGet("/", () => "Welcome to Anagram Solver API");
 
+app.MapGet("/{word}", (string word) =>
+{
+    List<string> anagrams = Anagram.FindAllAnagrams(word);
+
+    return new
+    {
+        Word = word,
+        Results = anagrams.Count,
+        Anagrams = anagrams,
+    };
+});
+
 app.MapGet("/anagrams/{word}", (string word, [FromQuery] string extras) =>
 {
 
