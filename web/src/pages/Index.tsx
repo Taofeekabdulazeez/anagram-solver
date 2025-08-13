@@ -4,11 +4,24 @@ import { Helmet } from "react-helmet-async";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "@/hooks/use-toast";
-import { Search, Copy, Check, ArrowUpDown, SortAsc, SortDesc } from "lucide-react";
+import {
+  Search,
+  Copy,
+  Check,
+  ArrowUpDown,
+  SortAsc,
+  SortDesc,
+} from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 interface ApiResponse {
@@ -22,7 +35,8 @@ type SortKey = "alpha" | "length";
 type SortDir = "asc" | "desc";
 
 const fetchAnagrams = async (word: string): Promise<ApiResponse> => {
-  const res = await fetch(`https://anagram-solver.onrender.com/${encodeURIComponent(word)}`);
+  const res = await fetch(`https://anagram-solver.onrender.com/${word}`);
+
   if (!res.ok) throw new Error("Failed to fetch anagrams");
   return res.json();
 };
@@ -36,7 +50,7 @@ const Index = () => {
 
   const { mutateAsync, data, isPending, isSuccess } = useMutation({
     mutationFn: fetchAnagrams,
-    onError: (err: any) => {
+    onError: (err) => {
       toast({
         title: "Something went wrong",
         description: err?.message ?? "Could not load anagrams.",
@@ -47,7 +61,10 @@ const Index = () => {
   const onSearch = async (w?: string) => {
     const word = (w ?? query).trim();
     if (!word) {
-      toast({ title: "Enter a word", description: "Type a word to find its anagrams." });
+      toast({
+        title: "Enter a word",
+        description: "Type a word to find its anagrams.",
+      });
       return;
     }
     setActiveWord(word);
@@ -80,7 +97,7 @@ const Index = () => {
   const handleCopy = async (w: string) => {
     try {
       await navigator.clipboard.writeText(w);
-      toast({ title: "Copied", description: `\"${w}\" copied to clipboard.` });
+      toast({ title: "Copied", description: `"${w}" copied to clipboard.` });
     } catch {
       toast({ title: "Copy failed", description: "Please try again." });
     }
@@ -90,7 +107,10 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Anagram Solver | Fast Word Unscrambler</title>
-        <meta name="description" content="Anagram Solver app: enter a word to discover all its anagrams with filters and sorting. Copy results or rerun searches instantly." />
+        <meta
+          name="description"
+          content="Anagram Solver app: enter a word to discover all its anagrams with filters and sorting. Copy results or rerun searches instantly."
+        />
         <link rel="canonical" href="/" />
       </Helmet>
 
@@ -100,7 +120,12 @@ const Index = () => {
             Anagram Solver
           </a>
           <nav className="flex items-center gap-4">
-            <a href="/docs" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Docs</a>
+            <a
+              href="/docs"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Docs
+            </a>
             <ThemeToggle />
           </nav>
         </div>
@@ -151,7 +176,10 @@ const Index = () => {
                 <Separator orientation="vertical" className="hidden sm:block" />
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-muted-foreground">Sort</span>
-                  <Select value={sortKey} onValueChange={(v) => setSortKey(v as SortKey)}>
+                  <Select
+                    value={sortKey}
+                    onValueChange={(v) => setSortKey(v as SortKey)}
+                  >
                     <SelectTrigger className="w-[160px]">
                       <SelectValue placeholder="Alphabetical" />
                     </SelectTrigger>
@@ -164,10 +192,16 @@ const Index = () => {
                     variant="secondary"
                     size="icon"
                     aria-label="Toggle sort direction"
-                    onClick={() => setSortDir((d) => (d === "asc" ? "desc" : "asc"))}
+                    onClick={() =>
+                      setSortDir((d) => (d === "asc" ? "desc" : "asc"))
+                    }
                   >
                     {sortDir === "asc" ? (
-                      sortKey === "alpha" ? <SortAsc className="h-4 w-4" /> : <ArrowUpDown className="h-4 w-4" />
+                      sortKey === "alpha" ? (
+                        <SortAsc className="h-4 w-4" />
+                      ) : (
+                        <ArrowUpDown className="h-4 w-4" />
+                      )
                     ) : (
                       <SortDesc className="h-4 w-4" />
                     )}
@@ -183,7 +217,9 @@ const Index = () => {
                 <div className="text-sm text-muted-foreground">
                   Results for <span className="font-medium">{activeWord}</span>
                 </div>
-                <Badge variant="secondary">{filteredSorted.length} results</Badge>
+                <Badge variant="secondary">
+                  {filteredSorted.length} results
+                </Badge>
               </div>
             )}
 
@@ -239,12 +275,15 @@ const Index = () => {
                     <Check className="h-5 w-5 text-muted-foreground" />
                   </div>
                   <p className="text-lg font-medium">No anagrams found</p>
-                  <p className="text-sm text-muted-foreground">Try a different word or adjust filters.</p>
+                  <p className="text-sm text-muted-foreground">
+                    Try a different word or adjust filters.
+                  </p>
                 </CardContent>
               </Card>
             ) : (
               <div className="text-center text-sm text-muted-foreground">
-                Tip: click a result to copy it, or use the search icon to rerun the search.
+                Tip: click a result to copy it, or use the search icon to rerun
+                the search.
               </div>
             )}
           </div>
@@ -253,7 +292,8 @@ const Index = () => {
 
       <footer className="border-t">
         <div className="container py-6 text-center text-xs text-muted-foreground">
-          Built with ❤️ • Smooth animations, light/dark themes, and delightful details.
+          Built with ❤️ • Smooth animations, light/dark themes, and delightful
+          details.
         </div>
       </footer>
     </div>
