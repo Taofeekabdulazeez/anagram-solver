@@ -113,7 +113,6 @@ const Index = () => {
         />
         <link rel="canonical" href="/" />
       </Helmet>
-
       <header className="sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b">
         <div className="container flex items-center justify-between py-4">
           <a href="/" className="story-link font-semibold text-lg">
@@ -121,16 +120,16 @@ const Index = () => {
           </a>
           <nav className="flex items-center gap-4">
             <a
-              href="/docs"
+              target="_blank"
+              href="https://github.com/Taofeekabdulazeez/anagram-solver"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              Docs
+              Github
             </a>
             <ThemeToggle />
           </nav>
         </div>
       </header>
-
       <main className="container py-10">
         <section className="mx-auto max-w-3xl animate-enter">
           <h1 className="mb-6 text-center text-4xl font-extrabold tracking-tight bg-gradient-to-r from-brand to-brand-2 bg-clip-text text-transparent">
@@ -289,13 +288,12 @@ const Index = () => {
           </div>
         </section>
       </main>
-
-      <footer className="border-t">
+      {/* <footer className="border-t">
         <div className="container py-6 text-center text-xs text-muted-foreground">
           Built with ❤️ • Smooth animations, light/dark themes, and delightful
           details.
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };
