@@ -35,7 +35,7 @@ type SortKey = "alpha" | "length";
 type SortDir = "asc" | "desc";
 
 const fetchAnagrams = async (word: string): Promise<ApiResponse> => {
-  const res = await fetch(`https://anagram-solver.onrender.com/${word}`);
+  const res = await fetch(`https://anagram-solver.onrender.com/${word.toLowerCase()}`);
 
   if (!res.ok) throw new Error("Failed to fetch anagrams");
   return res.json();
